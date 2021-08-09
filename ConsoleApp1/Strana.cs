@@ -8,20 +8,20 @@ using System.ComponentModel.DataAnnotations;
 
 namespace ConsoleApp1
 {
-    [Table("strana")]
-    public class Strana
+    [Table("country")]
+    public class Country
     {
-        public Strana()
+        public Country()
         {
-            this.Naselenies = new HashSet<Naselenie>();
+            this.Peoples = new HashSet<People>();
         }
         public int id { get; set; }
         public string Name { get; set; }
-        public string Stolica { get; set; }
+        public string Capital { get; set; }
 
         public string Region { get; set; }
 
-        public virtual ICollection<Naselenie> Naselenies { get; set; }
+        public virtual ICollection<People> Peoples { get; set; }
     
 
     }
