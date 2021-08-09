@@ -12,47 +12,47 @@ namespace ConsoleApp1
         static void Main(string[] args)
         {
             NewDB db = new NewDB();
-            DbSet<Strana> t = db.Stranas;
-            DbSet<Nacionalnost> s = db.Nacionalnosts;
-            DbSet<Naselenie> b = db.Naselenies;
-            Nacionalnost nac = new Nacionalnost();
+            DbSet<Country> t = db.Countrys;
+            DbSet<Nationality> s = db.Nationalitys;
+            DbSet<People> b = db.Peoples;
+            Nationality nac = new Nationality();
 
 
-             Strana str = new Strana();
+             Country str = new Country();
 
 
-              Naselenie nas = new Naselenie();
-            Nacionalnost nac1 = new Nacionalnost();
+              People nas = new People();
+            Nationality nac1 = new Nationality();
             nac.id = 1;
-            nac.Kolichesvo = 124;
+            nac.quantity = 124;
             nac.Language = "sgasdg";
             nac.Name = "sdgas";
-            nac.Naselenies.Add(nas);
+            nac.People.Add(nas);
 
 
             db.SaveChanges();
 
             nac1.id = 2;
-            nac1.Kolichesvo = 23523532263462;
+            nac1.quantity = 23523532263462;
             nac1.Language = "sgasdg";
             nac1.Name = "'светлый эльф'";
-            nac1.Naselenies.Add(nas);
+            nac1.People.Add(nas);
 
             db.SaveChanges();
 
             str.id = 1;
-            str.Name = "Strana1";
-                str.Naselenies.Add(nas);
+            str.Name = "Country1";
+                str.People.Add(nas);
           
                 str.Region = "Region1";
-            str.Stolica = "Stolica1";
+            str.Capital = Capital1";
 
             db.SaveChanges();
             nas.id = 1;
-            nas.chislenost = 1241245;
-            nas.nacionalnost = nac;
-            nas.StranaId = str.id;
-            nas.NacionalnostId = nac.id;
+            nas.quantity = 1241245;
+            nas.nationality = nac;
+            nas.CountryId = str.id;
+            nas.NationalityId = nac.id;
 
             db.SaveChanges();
             // t.Add(rec);
@@ -62,73 +62,66 @@ namespace ConsoleApp1
 
 
 
-            //Console.WriteLine($"id: {nac.id}, Kolichesvo: {nac.Kolichesvo}");
+          
 
-            Console.WriteLine($"id: {nas.nacionalnost}");
+            Console.WriteLine($"id: {nas.nationality}");
 
            // var mostUsedTags = db.Tags.OrderByDescending(t => t.Videos.Count).Take(10)
  
-            var result = from Nacionalnost in db.Nacionalnosts
-                         join Naselenie in db.Naselenies on nas.NacionalnostId equals nac.id
-                         join Strana in db.Stranas on str.id equals nas.NacionalnostId
-                         where str.Name == "ОЗ" && nac.Kolichesvo > (nas.chislenost * 20 / 100)
+            var result = from Nationality in db.Nationalitys
+                         join People in db.Peoples on nas.NationalityId equals nac.id
+                         join Country in db.Countrys on str.id equals nas.NationalityId
+                         where str.Name == "ОЗ" && nac.quantity > (nas.quantity * 20 / 100)
                          select new
                          {
                              name = str.Name,
                              list = nac.Language
                          };
 
-            var result1 = from Strana in db.Stranas
-                         join Naselenie in db.Naselenies on nas.StranaId equals str.id
+            var result1 = from Country in db.Countrys
+                         join People in db.Peoples on nas.CountryId equals str.id
                        
                          select new
                          {
                              name = str.Name,
-                             kolichestvo = nas.chislenost
+                             quantity = nas.quantity
                          };
             foreach (var r in result1)
             {
-                Console.WriteLine($"name: {r.name}, kolichestvo {r.kolichestvo}");
+                Console.WriteLine($"name: {r.name}, quantity {r.quantity}");
             }
 
 
 
-//            var d = db.Stranas
-//.Select(p => new { Name = p.Name, Company = p.Company.Name, Price = p.Price })
-//.Join  (c=>)
-//.OrderBy(p => p.Price)
-
-//.ThenBy(p => p.Company)
-
-//;
 
 
-            var result2 = from Strana in db.Stranas
-                          join Naselenie in db.Naselenies on nas.StranaId equals str.id
-                          join Nacionalnost in db.Nacionalnosts on nac.id equals nas.NacionalnostId
+
+            var result2 = from Country in db.Countrys
+                          join People in db.Peoples on nas.CountryId equals str.id
+                          join Nationality in db.Nationalitys on nac.id equals nas.NationalityId
                                
                           where nac.Name == "светлый эльф"
-                          orderby nac.Kolichesvo
+                          orderby nac.quantity
                           select new
                           {
                               
-                              stolica = str.Stolica.Take(1),
+                              stolica = str.Capital.Take(1),
                              
-                              kolichesvo=nac.Kolichesvo
+                              quantity=nac.quantity
                           };
 
 
 
             foreach (var r in result2)
             {
-                Console.WriteLine($"name: {r.stolica}, kolichestvo {r.kolichesvo}");
+                Console.WriteLine($"name: {r.stolica}, quantity {r.quantity}");
             }
 
 
 
-            var result3 = from Nacionalnost in db.Nacionalnosts
-                              join Naselenie in db.Naselenies on nas.NacionalnostId equals nac.id
-                              join Strana in db.Stranas on str.id equals nas.NacionalnostId
+            var result3 = from Nationality in db.Nationalitys
+                              join People in db.Peoples on nas.PeopleId equals nac.id
+                              join Country in db.Countrys on str.id equals nas.NationalityId
                               where str.Region == "Драконовы горы"
                               select new
                               {
