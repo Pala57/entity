@@ -7,17 +7,17 @@ using System.ComponentModel.DataAnnotations.Schema;
 using System.ComponentModel.DataAnnotations;
 namespace ConsoleApp1
 {
-    [Table("naselenie")]
-   public class Naselenie
+    [Table("people")]
+   public class People
     {
         public int id { get; set; }
 
-        public float chislenost { get; set; }
+        public float quantity { get; set; }
 
-        public int? StranaId { get; set; }
+        public int? CountryId { get; set; }
 
-        public Strana strana { get; set; }
-        public int? NacionalnostId { get; set; }
-        public Nacionalnost nacionalnost { get; set; }
+        public Country country { get; set; }
+        public int? NationalityId { get; set; }
+        public Nationality nationality { get; set; }
     }
 }
