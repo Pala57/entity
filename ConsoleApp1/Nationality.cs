@@ -17,7 +17,7 @@ namespace ConsoleApp1
         public int id { get; set; }
         public string Language { get; set; }
         public string Name { get; set; }
-        public float Quantity { get; set; }
+        public float quantity { get; set; }
 
         public virtual ICollection<People> People { get; set; }
 
