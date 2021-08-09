@@ -7,19 +7,19 @@ using System.ComponentModel.DataAnnotations.Schema;
 using System.ComponentModel.DataAnnotations;
 namespace ConsoleApp1
 {
-    [Table("nacionalnost")]
-    public class Nacionalnost
+    [Table("nationality")]
+    public class Nationality
     {
-        public Nacionalnost()
+        public Nationality()
         {
-            this.Naselenies = new HashSet<Naselenie>();
+            this.People = new HashSet<People>();
         }
         public int id { get; set; }
         public string Language { get; set; }
         public string Name { get; set; }
-        public float Kolichesvo { get; set; }
+        public float Quantity { get; set; }
 
-        public virtual ICollection<Naselenie> Naselenies { get; set; }
+        public virtual ICollection<People> People { get; set; }
 
     }
 }
